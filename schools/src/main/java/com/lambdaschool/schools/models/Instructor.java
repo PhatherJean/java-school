@@ -1,8 +1,10 @@
 package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Instructor
     /**
      * The Instructor's name (String)
      */
+    @Size(min = 2, max = 30, message = "Instructor name must be between 2 and 30 characters")
     @Column(nullable = false)
     private String name;
 
@@ -56,6 +59,18 @@ public class Instructor
         this.name = name;
     }
 
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
+    }
+
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String advice;
     /**
      * Getter for the instructor id
      *
