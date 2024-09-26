@@ -1,8 +1,11 @@
 package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +21,7 @@ public class Course
     /**
      * Primary key (long) for this course
      */
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long courseid;
@@ -25,6 +29,11 @@ public class Course
     /**
      * Name (String) of this Course. Cannot be null and must be unique
      */
+
+    @Size(min = 2,
+            max = 50,
+            message = "Course name must be between 2 and 50 characters")
+    @NotNull
     @Column(nullable = true,
         unique = true)
     private String coursename;
